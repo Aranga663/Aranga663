@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pixel Thoughts Recreation</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: radial-gradient(#000, #111);
+      color: #fff;
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+    }
+    #container {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }
+    #thoughtInput {
+      font-size: 1.2rem;
+      padding: 10px;
+      width: 300px;
+      max-width: 90%;
+    }
+    #bubble {
+      margin: 20px auto;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+    }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <h1>Pixel Thoughts</h1>
+    <p>Take a deep breath and type in what's on your mind.</p>
+    <input id="thoughtInput" placeholder="Your thought..." />
+    <div id="bubble"></div>
+    <p id="message"></p>
+  </div>
+
+  <script>
+    const input = document.getElementById('thoughtInput');
+    const bubble = document.getElementById('bubble');
+    const message = document.getElementById('message');
+    let timer;
+
+    input.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' && input.value.trim()) {
+        startMeditation(input.value.trim());
+      }
+    });
+
+    function startMeditation(text) {
+      bubble.textContent = text;
+      input.disabled = true;
+      message.textContent = 'Focus on this thought and breathe...';
+      let seconds = 60;
+      timer = setInterval(() => {
+        seconds--;
+        if (seconds <= 0) {
+          clearInterval(timer);
+          bubble.textContent = '';
+          message.textContent = 'Let your thought fade away into the vast universe.';
+        }
+      }, 1000);
+    }
+  </script>
+</body>
+</html>
